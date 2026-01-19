@@ -27,22 +27,25 @@
     #page-wrapper { background: transparent; }
 
     /* ======================
-       HEADER (mais alto/arejado)
+       HEADER (mais grosso / menos apertado)
        ====================== */
     #header{
-      background: rgba(11,12,16,0.60) !important;
+      background: rgba(11,12,16,0.62) !important;
       border-bottom: 1px solid var(--soft);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
-    #header.alt{ background: rgba(11,12,16,0.25) !important; border-bottom: 1px solid transparent; }
+    #header.alt{
+      background: rgba(11,12,16,0.30) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
     #header .inner-h{
       display:flex;
       align-items:center;
       justify-content:space-between;
       padding: 0 1.75rem;
-      height: 4.6rem; /* era 3.6rem (apertava) */
+      height: 5.1rem; /* mais “grosso” */
       gap: 16px;
     }
 
@@ -55,7 +58,7 @@
       min-width: 0;
     }
     .brand img{
-      height: 68px; /* mais legível */
+      height: 72px;
       width: auto;
       display:block;
       filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55));
@@ -69,7 +72,7 @@
     .brand .brand-text strong{
       letter-spacing: .16em;
       text-transform: uppercase;
-      font-weight: 750;
+      font-weight: 780;
       font-size: .92em;
       color: var(--text);
       white-space: nowrap;
@@ -81,37 +84,63 @@
       white-space: nowrap;
     }
 
+    /* MENU (sem “circulo”, com ícone hamburguer) */
     .menu-link{
-      display:flex;
+      display:inline-flex;
       align-items:center;
-      justify-content:center;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.05);
+      gap: .55rem;
+      border: 0;
+      background: transparent;
       color: var(--text);
-      border-radius: 999px;
-      padding: .65rem 1.05rem;
+      padding: .5rem .25rem;
       text-decoration:none;
-      font-weight: 700;
-      letter-spacing: .10em;
+      font-weight: 800;
+      letter-spacing: .14em;
       text-transform: uppercase;
       font-size: .78em;
-      min-width: 110px; /* evita “apertado” */
+      opacity: .95;
     }
-    .menu-link:hover{ background: rgba(255,255,255,0.08); }
+    .menu-link:hover{ opacity: 1; }
+
+    .menu-link .hamburger{
+      width: 18px;
+      height: 12px;
+      position: relative;
+      display:inline-block;
+    }
+    .menu-link .hamburger:before,
+    .menu-link .hamburger:after,
+    .menu-link .hamburger i{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      background: rgba(255,255,255,0.86);
+      border-radius: 2px;
+    }
+    .menu-link .hamburger:before{ top:0; }
+    .menu-link .hamburger i{ top:5px; }
+    .menu-link .hamburger:after{ bottom:0; }
 
     @media (max-width: 820px){
-      #header .inner-h{ height: 4.1rem; padding: 0 1.05rem; }
-      .brand img{ height: 54px; }
-      .menu-link{ min-width: 92px; padding: .55rem .85rem; }
-      .brand .brand-text span{ display:none; } /* no mobile fica mais clean */
+      #header .inner-h{ height: 4.5rem; padding: 0 1.05rem; }
+      .brand img{ height: 56px; }
+      .brand .brand-text span{ display:none; }
+    }
+
+    /* Para ancoragem não ficar escondida atrás do header */
+    .anchor-target{ scroll-margin-top: 96px; }
+    @media (max-width: 820px){
+      .anchor-target{ scroll-margin-top: 86px; }
     }
 
     /* ======================
-       HERO (menos gap embaixo)
+       HERO (menos espaço antes dos trabalhos)
        ====================== */
     #hero{
       position: relative;
-      padding: 6.2rem 0 2.2rem 0; /* reduzido (era bem alto) */
+      padding: 5.8rem 0 1.35rem 0; /* menos “quebras” */
       border-bottom: 1px solid rgba(255,255,255,0.08);
       overflow:hidden;
     }
@@ -122,7 +151,7 @@
       background:
         radial-gradient(1200px 520px at 12% 18%, rgba(255,255,255,0.08), transparent 60%),
         radial-gradient(900px 480px at 82% 25%, rgba(255,255,255,0.06), transparent 60%),
-        linear-gradient(180deg, rgba(11,12,16,0.10) 0%, rgba(11,12,16,0.65) 55%, rgba(11,12,16,1) 100%),
+        linear-gradient(180deg, rgba(11,12,16,0.08) 0%, rgba(11,12,16,0.62) 55%, rgba(11,12,16,1) 100%),
         url("images/hero.jpg");
       background-size: cover;
       background-position: center;
@@ -135,78 +164,91 @@
       position:absolute;
       inset:0;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
-      opacity:.28;
+      opacity:.22;
       mix-blend-mode: overlay;
       pointer-events:none;
     }
     #hero .inner{ position:relative; z-index:1; }
 
     .hero-title{
-      margin-top: 0;
-      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      margin: 0;
+      font-size: clamp(2.05rem, 4vw, 3.1rem);
       line-height: 1.06;
       letter-spacing: .02em;
       color: var(--text);
     }
+
     .hero-sub{
       margin-top: .85rem;
-      max-width: 70ch;
+      max-width: 86ch;
       color: var(--muted);
-      font-size: 1.05em;
+      font-size: 1.02em;
+      line-height: 1.55;
     }
+    .hero-sub p{
+      margin: 0 0 .85rem 0;
+    }
+    .hero-sub p:last-child{ margin-bottom: 0; }
+
+    /* Botões do hero mais sutis */
     .hero-ctas{
-      margin-top: 1.25rem;
+      margin-top: 1.05rem;
       display:flex;
       flex-wrap:wrap;
-      gap:.85rem;
+      gap:.7rem;
       align-items:center;
     }
 
     .btn{
       appearance:none;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.055);
       color: var(--text);
-      padding: .8rem 1.05rem;
-      border-radius: 14px;
+      padding: .66rem .92rem;   /* menor */
+      border-radius: 12px;
       text-decoration:none;
-      font-weight: 700;
-      letter-spacing: .05em;
+      font-weight: 720;
+      letter-spacing: .04em;
+      font-size: .95em;         /* menor */
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
       cursor:pointer;
+      line-height: 1.1;
     }
     .btn:hover{
       transform: translateY(-1px);
-      background: rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.085);
       border-color: rgba(255,255,255,0.22);
     }
     .btn.primary{
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.11);
       border-color: rgba(255,255,255,0.22);
     }
+
+    /* Botões Exibir mais/menos menores e sem “acavalamento” */
     .btn.mini{
-      padding: .62rem 1.05rem;
+      padding: .52rem .92rem;
       border-radius: 999px;
-      font-size: .80em;
+      font-size: .72em;
       text-transform: uppercase;
-      letter-spacing: .12em;
+      letter-spacing: .14em;
+      line-height: 1.15;
     }
 
-    /* Wrapper encosta mais nos trabalhos (reduz gap) */
-    #wrapper.wrapper{ padding-top: .25rem !important; }
+    /* Wrapper encosta mais nos trabalhos */
+    #wrapper.wrapper{ padding-top: 0 !important; }
 
     /* ======================
        SEÇÕES
        ====================== */
     .section-block{
-      padding: 2.2rem 0; /* menor pra ficar mais “tight” */
+      padding: 1.75rem 0; /* menos espaçamento */
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .section-block:last-child{ border-bottom: 0; }
 
     .section-head{
-      display:block; /* sem botão aqui em cima */
-      margin-bottom: 1.05rem;
+      display:block;
+      margin-bottom: .95rem;
     }
     .section-title{
       margin: 0;
@@ -235,7 +277,7 @@
 
     .work-card{
       border: 1px solid rgba(255,255,255,0.10);
-      background: var(--panel);
+      background: rgba(255,255,255,0.035);
       border-radius: var(--radius);
       overflow:hidden;
       cursor:pointer;
@@ -244,7 +286,7 @@
     .work-card:hover{
       transform: translateY(-2px);
       border-color: rgba(255,255,255,0.18);
-      background: var(--panel2);
+      background: rgba(255,255,255,0.05);
     }
 
     .work-thumb{
@@ -305,14 +347,12 @@
       line-height: 1.45;
     }
 
-    /* colapsado: só 4 itens */
     .work-grid.is-collapsed .work-card:nth-child(n + 5){ display:none; }
 
-    /* botão Exibir mais CENTRALIZADO abaixo do grid */
     .section-controls{
       display:flex;
       justify-content:center;
-      margin-top: 1.15rem;
+      margin-top: 1.0rem;
     }
 
     /* ======================
@@ -379,22 +419,37 @@
     }
 
     /* ======================
-       CONTATO (mais compacto)
+       CONTATO (compacto, ícones sem encavalar)
        ====================== */
     #contact{
       background: linear-gradient(180deg, rgba(11,12,16,1) 0%, rgba(9,10,13,1) 100%) !important;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
     #contact .contact{
-      margin-top: .65rem; /* era 1.2rem */
+      margin-top: .75rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .35rem 1.2rem;
     }
-    /* deixa a lista mais “tight” */
+    @media (max-width: 820px){
+      #contact .contact{ grid-template-columns: 1fr; }
+    }
+
+    /* Corrige ícones “acavalados” */
     #contact .contact li{
-      margin: .35rem 0 !important;
-      padding-left: 2.25rem !important;
+      margin: 0 !important;
+      padding-left: 2.65rem !important;
+      line-height: 1.35 !important;
+      position: relative;
     }
+    #contact .contact li:before{
+      width: 2.1rem !important;
+      text-align: center !important;
+      line-height: 1.35 !important;
+    }
+
     #contact p{
-      margin-bottom: .9rem !important;
+      margin-bottom: .75rem !important;
     }
   </style>
 </head>
@@ -413,7 +468,10 @@
           </div>
         </a>
 
-        <a class="menu-link" href="#menu">Menu</a>
+        <a class="menu-link" href="#menu" aria-label="Abrir menu">
+          <span class="hamburger" aria-hidden="true"><i></i></span>
+          Menu
+        </a>
       </div>
     </header>
 
@@ -423,7 +481,7 @@
         <h2>Menu</h2>
         <ul class="links">
           <li><a href="#hero">Início</a></li>
-          <li><a href="#filmes">Filmes</a></li>
+          <li><a href="#filmes-title">Filmes</a></li>
           <li><a href="#videoclipes">Videoclipes</a></li>
           <li><a href="#publicidade">Publicidade</a></li>
           <li><a href="#institucional">Institucional</a></li>
@@ -437,12 +495,25 @@
     <section id="hero">
       <div class="inner">
         <h1 class="hero-title">Nunca Filmes</h1>
-        <p class="hero-sub">
-          Mini bio (troque o texto): produção e pós para marcas, artistas e projetos autorais.
-          Layout clean e sofisticado, com vídeos hospedados como <strong>não listados no YouTube</strong>.
-        </p>
+
+        <div class="hero-sub">
+          <p>
+            Criada por Leco Petersen em 2015, a Nunca Filmes iniciou suas atividades com a participação no Festival Internacional
+            de Audiovisual MIMPI, organizado pela revista VOID. Intitulado de "SEXTO", uma co-produção com a Take Indpnt, o vídeo
+            de skate conta com a participação dos skatistas profissionais Dwayne Fagundes e Djorge Oliveira, sendo classificado
+            entre os finalistas e exibido no evento de encerramento do festival no Rio de Janeiro.
+          </p>
+          <p>
+            Com a repercussão do projeto, a NUNCA ganhou visibilidade na cena audiovisual, tendo a oportunidade de trabalhar com
+            artistas locais, como a direção de seu primeiro videoclipe "Olhos Vendados", da banda de newmetal Experimento Vinte.
+            A partir daí, novos trabalhos vêm sendo desenvolvidos, sempre prezando pela qualidade e originalidade em nossas produções,
+            fazendo uso de conceitos cinematográficos na criação das suas peças audiovisuais.
+          </p>
+        </div>
+
         <div class="hero-ctas">
-          <a class="btn primary" href="#filmes">Ver trabalhos</a>
+          <!-- agora aponta pro TÍTULO, não pro thumb -->
+          <a class="btn primary" href="#filmes-title">Ver trabalhos</a>
           <a class="btn" href="#contact">Orçamentos / Contato</a>
         </div>
       </div>
@@ -455,7 +526,7 @@
         <!-- FILMES -->
         <section id="filmes" class="section-block work-section">
           <div class="section-head">
-            <h2 class="section-title">Trabalhos · Filmes</h2>
+            <h2 id="filmes-title" class="section-title anchor-target">Trabalhos · Filmes</h2>
             <p class="section-note">Seleção de filmes. Clique em um card para assistir.</p>
           </div>
 
@@ -504,7 +575,7 @@
         <!-- VIDEOCLIPES -->
         <section id="videoclipes" class="section-block work-section">
           <div class="section-head">
-            <h2 class="section-title">Trabalhos · Videoclipes</h2>
+            <h2 class="section-title anchor-target">Trabalhos · Videoclipes</h2>
             <p class="section-note">Seleção de videoclipes. Clique em um card para assistir.</p>
           </div>
 
@@ -551,7 +622,7 @@
         <!-- PUBLICIDADE -->
         <section id="publicidade" class="section-block work-section">
           <div class="section-head">
-            <h2 class="section-title">Trabalhos · Publicidade</h2>
+            <h2 class="section-title anchor-target">Trabalhos · Publicidade</h2>
             <p class="section-note">Seleção de comerciais/campanhas. Clique em um card para assistir.</p>
           </div>
 
@@ -599,7 +670,7 @@
         <!-- INSTITUCIONAL -->
         <section id="institucional" class="section-block work-section">
           <div class="section-head">
-            <h2 class="section-title">Trabalhos · Institucional</h2>
+            <h2 class="section-title anchor-target">Trabalhos · Institucional</h2>
             <p class="section-note">Vídeos institucionais e conteúdo corporativo. Clique em um card para assistir.</p>
           </div>
 
@@ -652,14 +723,19 @@
       <div class="inner">
         <h2 class="major">Contato</h2>
         <p style="color: rgba(255,255,255,0.72); max-width: 70ch;">
-          Para orçamento, parcerias ou projetos: me chame por e-mail ou WhatsApp.
+          Para orçamentos, parcerias ou projetos:
         </p>
 
         <ul class="contact">
-          <li class="icon solid fa-envelope"><a href="mailto:seuemail@dominio.com">seuemail@dominio.com</a></li>
-          <li class="icon solid fa-phone"><a href="#">(11) 99999-9999</a></li>
-          <li class="icon brands fa-instagram"><a href="#">instagram.com/nuncafilmes</a></li>
-          <li class="icon brands fa-youtube"><a href="#">youtube.com/@seucanal</a></li>
+          <li class="icon solid fa-envelope">
+            <a href="mailto:contato@nuncafilmes.com">contato@nuncafilmes.com</a>
+          </li>
+          <li class="icon brands fa-instagram">
+            <a href="#">@nuncafilmes</a>
+          </li>
+          <li class="icon brands fa-youtube">
+            <a href="#">/nuncafilmes</a>
+          </li>
         </ul>
       </div>
     </section>
@@ -696,7 +772,7 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-    // Expand/collapse per section (botão agora fica abaixo do grid)
+    // Expand/collapse per section
     (function(){
       document.querySelectorAll(".work-section").forEach((section) => {
         const grid = section.querySelector(".work-grid");
@@ -726,7 +802,7 @@
       });
     })();
 
-    // Modal video player (mantido)
+    // Modal video player
     (function () {
       const modal = document.getElementById("videoModal");
       const backdrop = document.getElementById("modalBackdrop");
