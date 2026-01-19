@@ -1,611 +1,320 @@
 <!DOCTYPE HTML>
 <html lang="pt-BR">
-  <head>
-    <title>Nunca Filmes — Portfólio</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="Nunca Filmes — Portfólio de vídeo. Direção, captação, edição e pós." />
+<head>
+  <title>Nunca Filmes — Portfólio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="description" content="Nunca Filmes — Portfólio de vídeo" />
 
-    <!-- Solid State CSS -->
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-    <style>
-      /* =========================
-         CLEAN + SOPHISTICATED OVERRIDES
-         ========================= */
+  <style>
 
-      :root{
-        --bg0:#0b0c10;
-        --bg1:#0f1117;
-        --line: rgba(255,255,255,0.14);
-        --soft: rgba(255,255,255,0.08);
-        --text: rgba(255,255,255,0.92);
-        --muted: rgba(255,255,255,0.70);
-      }
+    body {
+      background: #0e0e12;
+    }
 
-      body{ background: var(--bg0); }
-      #page-wrapper{ background: transparent; }
+    /* HEADER COM LOGO */
+    #header h1 a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-      /* Header / nav */
-      #header{
-        background: rgba(11,12,16,0.55) !important;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--soft);
-      }
-      #header.alt{ background: transparent !important; border-bottom: 1px solid transparent; }
-      #header h1 a{
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-      }
+    #header img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
 
-      .brand{
-        display:flex;
-        align-items:center;
-        gap: 12px;
-      }
-      .brand img{
-        height: 28px;
-        width:auto;
-        display:block;
-        filter: drop-shadow(0 6px 18px rgba(0,0,0,0.45));
-      }
-      .brand span{
-        font-size: 0.85em;
-        opacity: .9;
-        letter-spacing: .18em;
-      }
+    /* GRID DE TRABALHOS */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+    }
 
-      /* Hero */
-      #hero{
-        position: relative;
-        min-height: 92vh;
-        display:flex;
-        align-items:flex-end;
-        padding: 7rem 0 4rem 0;
-        overflow:hidden;
-        border-bottom: 1px solid var(--soft);
-      }
-      #hero .hero-bg{
-        position:absolute;
-        inset:0;
-        background:
-          radial-gradient(1200px 600px at 10% 20%, rgba(255,255,255,0.08), transparent 60%),
-          radial-gradient(900px 500px at 80% 30%, rgba(255,255,255,0.06), transparent 60%),
-          linear-gradient(180deg, rgba(11,12,16,0.35) 0%, rgba(11,12,16,0.85) 70%, rgba(11,12,16,1) 100%),
-          url("images/hero.jpg");
-        background-size: cover;
-        background-position: center;
-        transform: scale(1.02);
-        filter: saturate(0.95) contrast(1.02);
-      }
-      #hero .hero-noise{
-        position:absolute;
-        inset:0;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
-        mix-blend-mode: overlay;
-        opacity: .35;
-        pointer-events:none;
-      }
-      #hero .inner{
-        position:relative;
-        z-index:2;
-      }
-      .hero-kicker{
-        display:inline-flex;
-        align-items:center;
-        gap:.6rem;
-        border: 1px solid var(--line);
-        background: rgba(255,255,255,0.04);
-        padding: .45rem .8rem;
-        border-radius: 999px;
-        font-size: .85em;
-        color: var(--muted);
-        letter-spacing: .08em;
-        text-transform: uppercase;
-      }
-      .hero-title{
-        margin-top: 1.2rem;
-        font-size: clamp(2rem, 4vw, 3.3rem);
-        line-height: 1.08;
-        letter-spacing: .02em;
-        color: var(--text);
-      }
-      .hero-sub{
-        margin-top: .9rem;
-        max-width: 58ch;
-        color: var(--muted);
-        font-size: 1.05em;
-      }
-      .hero-ctas{
-        margin-top: 1.8rem;
-        display:flex;
-        flex-wrap:wrap;
-        gap: .85rem;
-        align-items:center;
-      }
-      .btn{
-        appearance:none;
-        border: 1px solid var(--line);
-        background: rgba(255,255,255,0.06);
-        color: var(--text);
-        padding: .85rem 1.1rem;
-        border-radius: 12px;
-        text-decoration:none;
-        font-weight: 600;
-        letter-spacing: .04em;
-        transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      }
-      .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.22); }
-      .btn.primary{
-        background: rgba(255,255,255,0.12);
-        border-color: rgba(255,255,255,0.22);
-      }
+    .work-card {
+      background: #141418;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+    }
 
-      /* Section headings */
-      .major{
-        letter-spacing: .08em;
-        text-transform: uppercase;
-        font-size: .95em !important;
-      }
+    .work-thumb {
+      position: relative;
+      padding-bottom: 56.25%;
+      overflow: hidden;
+    }
 
-      /* Project grid */
-      .work-grid{
-        display:grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 18px;
-        margin-top: 1.8rem;
-      }
-      .work-card{
-        grid-column: span 6;
-        border: 1px solid var(--soft);
-        background: rgba(255,255,255,0.03);
-        border-radius: 18px;
-        overflow:hidden;
-        cursor:pointer;
-        transition: transform .18s ease, border-color .18s ease, background .18s ease;
-      }
-      .work-card:hover{
-        transform: translateY(-2px);
-        border-color: rgba(255,255,255,0.18);
-        background: rgba(255,255,255,0.045);
-      }
-      .work-thumb{
-        position:relative;
-        aspect-ratio: 16/9;
-        background: #111;
-        overflow:hidden;
-      }
-      .work-thumb img{
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        transform: scale(1.02);
-        filter: saturate(0.98) contrast(1.02);
-        transition: transform .35s ease;
-        display:block;
-      }
-      .work-card:hover .work-thumb img{ transform: scale(1.06); }
-      .work-thumb:after{
-        content:"";
-        position:absolute;
-        inset:0;
-        background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.65) 100%);
-        pointer-events:none;
-      }
-      .work-meta{
-        padding: 16px 16px 18px 16px;
-      }
-      .work-topline{
-        display:flex;
-        justify-content:space-between;
-        gap: 10px;
-        align-items:baseline;
-        margin-bottom: 6px;
-      }
-      .work-title{
-        margin:0;
-        font-size: 1.05em;
-        letter-spacing: .02em;
-        color: var(--text);
-      }
-      .work-tag{
-        font-size: .78em;
-        color: var(--muted);
-        letter-spacing:.12em;
-        text-transform: uppercase;
-        border: 1px solid var(--line);
-        padding: .18rem .55rem;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.03);
-        white-space:nowrap;
-      }
-      .work-desc{
-        margin: 0;
-        color: var(--muted);
-        font-size: .95em;
-      }
+    .work-thumb img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-      /* Responsive grid */
-      @media (max-width: 980px){
-        .work-card{ grid-column: span 12; }
-      }
+    .work-meta {
+      padding: 12px;
+    }
 
-      /* Modal */
-      .modal{
-        position: fixed;
-        inset: 0;
-        display:none;
-        place-items:center;
-        z-index: 9999;
-        padding: 18px;
-      }
-      .modal.is-open{ display:grid; }
-      .modal-backdrop{
-        position:absolute;
-        inset:0;
-        background: rgba(0,0,0,0.72);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-      }
-      .modal-panel{
-        position:relative;
-        width:min(980px, 96vw);
-        border: 1px solid rgba(255,255,255,0.16);
-        border-radius: 18px;
-        background: rgba(15,17,23,0.9);
-        overflow:hidden;
-        box-shadow: 0 30px 120px rgba(0,0,0,0.65);
-      }
-      .modal-header{
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding: 14px 16px;
-        border-bottom: 1px solid var(--soft);
-      }
-      .modal-title{
-        margin:0;
-        font-size: .9em;
-        letter-spacing:.12em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .modal-close{
-        border: 1px solid var(--line);
-        background: rgba(255,255,255,0.06);
-        color: var(--text);
-        border-radius: 12px;
-        padding: .5rem .75rem;
-        cursor:pointer;
-      }
-      .video{
-        position:relative;
-        padding-bottom: 56.25%;
-        height:0;
-        overflow:hidden;
-      }
-      .video iframe{
-        position:absolute; inset:0;
-        width:100%; height:100%;
-      }
+    .work-title {
+      margin: 0;
+      font-size: 16px;
+    }
 
-      /* Footer cleanup */
-      #footer{
-        background: linear-gradient(180deg, rgba(11,12,16,1) 0%, rgba(9,10,13,1) 100%) !important;
-        border-top: 1px solid var(--soft);
-      }
-    </style>
-  </head>
+    .work-desc {
+      font-size: 14px;
+      opacity: .7;
+    }
 
-  <body class="is-preload">
-    <div id="page-wrapper">
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
 
-      <!-- Header -->
-      <header id="header" class="alt">
-        <h1>
-          <a href="#hero" class="brand">
-            <img src="images/logo_nunca.png" alt="Nunca Filmes" />
-            <span>Nunca Filmes</span>
-          </a>
-        </h1>
-        <nav>
-          <a href="#menu">Menu</a>
-        </nav>
-      </header>
+    .btn-mini {
+      padding: 6px 10px;
+      font-size: 14px;
+    }
 
-      <!-- Menu -->
-      <nav id="menu">
-        <div class="inner">
-          <h2>Menu</h2>
-          <ul class="links">
-            <li><a href="#hero">Início</a></li>
-            <li><a href="#works">Trabalhos</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="#contact">Contato</a></li>
-          </ul>
-          <a href="#" class="close">Fechar</a>
-        </div>
-      </nav>
+    .work-grid.is-collapsed .work-card:nth-child(n + 5) {
+      display: none;
+    }
 
-      <!-- Hero -->
-      <section id="hero">
-        <div class="hero-bg" aria-hidden="true"></div>
-        <div class="hero-noise" aria-hidden="true"></div>
+    /* MODAL */
 
-        <div class="inner">
-          <div class="hero-kicker">Portfólio de vídeo · Direção · Edição · Pós</div>
-          <h2 class="hero-title">Trabalhos selecionados — narrativa, marca e imagem.</h2>
-          <p class="hero-sub">
-            Layout clean, direto, e focado no que importa: o conteúdo. Aqui os vídeos ficam no YouTube como <strong>não listados</strong>,
-            e o site é sua vitrine profissional no seu domínio.
-          </p>
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(0,0,0,.8);
+      z-index: 9999;
+    }
 
-          <div class="hero-ctas">
-            <a class="btn primary" href="#works">Ver trabalhos</a>
-            <a class="btn" href="#contact">Orçamentos / Contato</a>
-          </div>
-        </div>
-      </section>
+    .modal.open {
+      display: grid;
+    }
 
-      <!-- Content -->
-      <section id="wrapper">
+    .modal-panel {
+      background: #111;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 900px;
+      width: 95%;
+    }
 
-        <!-- Works -->
-        <section id="works" class="wrapper style1">
-          <div class="inner">
-            <h2 class="major">Trabalhos</h2>
-            <p style="color: rgba(255,255,255,0.7);">
-              Clique em um projeto para abrir o vídeo. (Substitua depois as imagens e os IDs do YouTube.)
-            </p>
+    .video {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
 
-            <div class="work-grid">
+    .video iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
 
-              <!-- WORK 1 -->
-              <div class="work-card" role="button" tabindex="0"
-                   data-title="Projeto 01"
-                   data-youtube="YOUTUBE_ID_1"
-                   data-tag="Publicidade">
-                <div class="work-thumb">
-                  <img src="images/work-01.jpg" alt="Projeto 01" />
-                </div>
-                <div class="work-meta">
-                  <div class="work-topline">
-                    <h3 class="work-title">Projeto 01</h3>
-                    <span class="work-tag">Publicidade</span>
-                  </div>
-                  <p class="work-desc">Cliente / ano — direção + edição (troque esse texto).</p>
-                </div>
-              </div>
+  </style>
+</head>
 
-              <!-- WORK 2 -->
-              <div class="work-card" role="button" tabindex="0"
-                   data-title="Projeto 02"
-                   data-youtube="YOUTUBE_ID_2"
-                   data-tag="Institucional">
-                <div class="work-thumb">
-                  <img src="images/work-02.jpg" alt="Projeto 02" />
-                </div>
-                <div class="work-meta">
-                  <div class="work-topline">
-                    <h3 class="work-title">Projeto 02</h3>
-                    <span class="work-tag">Institucional</span>
-                  </div>
-                  <p class="work-desc">Descrição curta bem “cinema” (1 linha).</p>
-                </div>
-              </div>
+<body class="is-preload">
 
-              <!-- WORK 3 -->
-              <div class="work-card" role="button" tabindex="0"
-                   data-title="Projeto 03"
-                   data-youtube="YOUTUBE_ID_3"
-                   data-tag="Doc/TV">
-                <div class="work-thumb">
-                  <img src="images/work-03.jpg" alt="Projeto 03" />
-                </div>
-                <div class="work-meta">
-                  <div class="work-topline">
-                    <h3 class="work-title">Projeto 03</h3>
-                    <span class="work-tag">Doc/TV</span>
-                  </div>
-                  <p class="work-desc">Captação + montagem + finalização (troque).</p>
-                </div>
-              </div>
+<div id="page-wrapper">
 
-              <!-- WORK 4 -->
-              <div class="work-card" role="button" tabindex="0"
-                   data-title="Projeto 04"
-                   data-youtube="YOUTUBE_ID_4"
-                   data-tag="Clipe">
-                <div class="work-thumb">
-                  <img src="images/work-04.jpg" alt="Projeto 04" />
-                </div>
-                <div class="work-meta">
-                  <div class="work-topline">
-                    <h3 class="work-title">Projeto 04</h3>
-                    <span class="work-tag">Clipe</span>
-                  </div>
-                  <p class="work-desc">Uma linha de impacto com o que você fez.</p>
-                </div>
-              </div>
+<header id="header">
+  <h1>
+    <a href="index.html">
+      <img src="images/logo_nunca_500.png" alt="Nunca Filmes Logo" />
+      Nunca Filmes
+    </a>
+  </h1>
+</header>
 
-              <!-- WORK 5 -->
-              <div class="work-card" role="button" tabindex="0"
-                   data-title="Projeto 05"
-                   data-youtube="YOUTUBE_ID_5"
-                   data-tag="Evento">
-                <div class="work-thumb">
-                  <img src="images/work-05.jpg" alt="Projeto 05" />
-                </div>
-                <div class="work-meta">
-                  <div class="work-topline">
-                    <h3 class="work-title">Projeto 05</h3>
-                    <span class="work-tag">Evento</span>
-                  </div>
-                  <p class="work-desc">Highlights / cobertura / filme do evento.</p>
-                </div>
-              </div>
+<section id="banner">
+  <div class="inner">
+    <h2>Nunca Filmes</h2>
+    <p>Portfólio de direção, captação e edição de vídeo</p>
+  </div>
+</section>
 
-              <!-- WORK 6 -->
-              <div class="work-card" role="button" tabindex="0"
-                   data-title="Projeto 06"
-                   data-youtube="YOUTUBE_ID_6"
-                   data-tag="Motion">
-                <div class="work-thumb">
-                  <img src="images/work-06.jpg" alt="Projeto 06" />
-                </div>
-                <div class="work-meta">
-                  <div class="work-topline">
-                    <h3 class="work-title">Projeto 06</h3>
-                    <span class="work-tag">Motion</span>
-                  </div>
-                  <p class="work-desc">Animação / pós / entregas sociais.</p>
-                </div>
-              </div>
+<section id="wrapper">
 
-            </div>
-          </div>
-        </section>
+<div class="inner">
 
-        <!-- About -->
-        <section id="about" class="wrapper alt style2">
-          <div class="inner">
-            <h2 class="major">Sobre</h2>
-            <p style="color: rgba(255,255,255,0.72); max-width: 70ch;">
-              Aqui vai uma bio curta e “premium”: o que você faz, pra quem, e como.
-              Ex.: “Produção e pós para marcas, artistas e eventos — do conceito à finalização.”
-            </p>
+<h2 class="major">Trabalhos</h2>
 
-            <section class="features">
-              <article>
-                <h3 class="major">Serviços</h3>
-                <p>Direção, captação, edição, color, motion e finalização.</p>
-              </article>
-              <article>
-                <h3 class="major">Entregas</h3>
-                <p>Versões organizadas, revisão rápida e exports para cada plataforma.</p>
-              </article>
-            </section>
-          </div>
-        </section>
+<!-- FILMES -->
+<section>
+  <div class="section-head">
+    <h3>Filmes</h3>
+    <button class="btn-mini toggle">Exibir mais</button>
+  </div>
 
-        <!-- Contact -->
-        <section id="contact" class="wrapper style3">
-          <div class="inner">
-            <h2 class="major">Contato</h2>
-            <p style="color: rgba(255,255,255,0.72);">
-              Deixe aqui seus contatos principais (o mais profissional: e-mail + WhatsApp + Instagram).
-            </p>
+  <div class="work-grid is-collapsed">
 
-            <ul class="contact">
-              <li class="icon solid fa-envelope">
-                <a href="mailto:seuemail@dominio.com">seuemail@dominio.com</a>
-              </li>
-              <li class="icon solid fa-phone">
-                <a href="#">(xx) xxxxx-xxxx</a>
-              </li>
-              <li class="icon brands fa-instagram">
-                <a href="#">instagram.com/nuncafilmes</a>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-      </section>
-
-      <!-- Footer -->
-      <section id="footer">
-        <div class="inner">
-          <ul class="copyright">
-            <li>&copy; Nunca Filmes.</li>
-            <li>Template base: <a href="https://html5up.net">HTML5 UP</a></li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Modal -->
-      <div class="modal" id="videoModal" aria-hidden="true" aria-label="Modal de vídeo">
-        <div class="modal-backdrop" id="modalBackdrop"></div>
-        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-          <div class="modal-header">
-            <p class="modal-title" id="modalTitle">Projeto</p>
-            <button class="modal-close" id="modalClose" type="button">Fechar</button>
-          </div>
-          <div class="video" id="modalVideoWrap">
-            <!-- iframe entra via JS -->
-          </div>
-        </div>
+    <div class="work-card" data-youtube="YOUTUBE_ID_1">
+      <div class="work-thumb">
+        <img src="images/work1.jpg" />
       </div>
-
+      <div class="work-meta">
+        <h4 class="work-title">Filme 1</h4>
+        <p class="work-desc">Descrição</p>
+      </div>
     </div>
 
-    <!-- Solid State Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <div class="work-card" data-youtube="YOUTUBE_ID_2">
+      <div class="work-thumb">
+        <img src="images/work2.jpg" />
+      </div>
+      <div class="work-meta">
+        <h4>Filme 2</h4>
+      </div>
+    </div>
 
-    <!-- Modal / Video logic -->
-    <script>
-      (function () {
-        const modal = document.getElementById("videoModal");
-        const backdrop = document.getElementById("modalBackdrop");
-        const closeBtn = document.getElementById("modalClose");
-        const titleEl = document.getElementById("modalTitle");
-        const wrap = document.getElementById("modalVideoWrap");
+    <div class="work-card" data-youtube="YOUTUBE_ID_3">
+      <div class="work-thumb">
+        <img src="images/work3.jpg" />
+      </div>
+      <div class="work-meta">
+        <h4>Filme 3</h4>
+      </div>
+    </div>
 
-        function openModal(title, youtubeId) {
-          titleEl.textContent = title;
-          // Troque/ajuste parâmetros se quiser
-          const src = "https://www.youtube.com/embed/" + youtubeId + "?rel=0&modestbranding=1";
-          wrap.innerHTML =
-            '<iframe src="' + src + '" ' +
-            'title="' + title.replace(/"/g, "") + '" frameborder="0" ' +
-            'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
-            'allowfullscreen></iframe>';
+    <div class="work-card" data-youtube="YOUTUBE_ID_4">
+      <div class="work-thumb">
+        <img src="images/work4.jpg" />
+      </div>
+      <div class="work-meta">
+        <h4>Filme 4</h4>
+      </div>
+    </div>
 
-          modal.classList.add("is-open");
-          modal.setAttribute("aria-hidden", "false");
-          document.body.style.overflow = "hidden";
-        }
+  </div>
+</section>
 
-        function closeModal() {
-          modal.classList.remove("is-open");
-          modal.setAttribute("aria-hidden", "true");
-          wrap.innerHTML = "";
-          document.body.style.overflow = "";
-        }
+<!-- VIDEOCLIPES -->
+<section>
+  <div class="section-head">
+    <h3>Videoclipes</h3>
+    <button class="btn-mini toggle">Exibir mais</button>
+  </div>
 
-        function onCardActivate(card) {
-          const title = card.getAttribute("data-title") || "Projeto";
-          const youtubeId = card.getAttribute("data-youtube") || "";
-          if (!youtubeId || youtubeId.indexOf("YOUTUBE_ID_") === 0) {
-            alert("Troque o ID do YouTube neste card antes (data-youtube).");
-            return;
-          }
-          openModal(title, youtubeId);
-        }
+  <div class="work-grid is-collapsed">
 
-        document.querySelectorAll(".work-card").forEach((card) => {
-          card.addEventListener("click", () => onCardActivate(card));
-          card.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              onCardActivate(card);
-            }
-          });
-        });
+    <div class="work-card" data-youtube="YOUTUBE_ID_5">
+      <div class="work-thumb">
+        <img src="images/work5.jpg" />
+      </div>
+      <div class="work-meta"><h4>Clipe 1</h4></div>
+    </div>
 
-        backdrop.addEventListener("click", closeModal);
-        closeBtn.addEventListener("click", closeModal);
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-        });
-      })();
-    </script>
-  </body>
+    <div class="work-card" data-youtube="YOUTUBE_ID_6">
+      <div class="work-thumb">
+        <img src="images/work6.jpg" />
+      </div>
+      <div class="work-meta"><h4>Clipe 2</h4></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PUBLICIDADE -->
+<section>
+  <div class="section-head">
+    <h3>Publicidade</h3>
+    <button class="btn-mini toggle">Exibir mais</button>
+  </div>
+
+  <div class="work-grid is-collapsed">
+
+    <div class="work-card" data-youtube="YOUTUBE_ID_7">
+      <div class="work-thumb">
+        <img src="images/work7.jpg" />
+      </div>
+      <div class="work-meta"><h4>Pub 1</h4></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INSTITUCIONAL -->
+<section>
+  <div class="section-head">
+    <h3>Institucional</h3>
+    <button class="btn-mini toggle">Exibir mais</button>
+  </div>
+
+  <div class="work-grid is-collapsed">
+
+    <div class="work-card" data-youtube="YOUTUBE_ID_8">
+      <div class="work-thumb">
+        <img src="images/work8.jpg" />
+      </div>
+      <div class="work-meta"><h4>Institucional 1</h4></div>
+    </div>
+
+  </div>
+</section>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-panel">
+    <div class="video" id="modal-video"></div>
+  </div>
+</div>
+
+<script>
+
+document.querySelectorAll(".toggle").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const grid = btn.parentElement.nextElementSibling;
+
+    grid.classList.toggle("is-collapsed");
+
+    btn.textContent =
+      grid.classList.contains("is-collapsed")
+        ? "Exibir mais"
+        : "Exibir menos";
+  });
+});
+
+const modal = document.getElementById("modal");
+const videoWrap = document.getElementById("modal-video");
+
+document.querySelectorAll(".work-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const id = card.dataset.youtube;
+
+    videoWrap.innerHTML = `
+      <iframe
+        src="https://www.youtube.com/embed/${id}?rel=0"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>`;
+
+    modal.classList.add("open");
+  });
+});
+
+modal.addEventListener("click", () => {
+  modal.classList.remove("open");
+  videoWrap.innerHTML = "";
+});
+
+</script>
+
+</body>
 </html>
