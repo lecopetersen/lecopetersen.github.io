@@ -4,317 +4,815 @@
   <title>Nunca Filmes — Portfólio</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <meta name="description" content="Nunca Filmes — Portfólio de vídeo" />
+  <meta name="description" content="Nunca Filmes — Portfólio de vídeo. Direção, captação, edição e pós." />
 
+  <!-- Solid State base -->
   <link rel="stylesheet" href="assets/css/main.css" />
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
   <style>
-
-    body {
-      background: #0e0e12;
+    :root{
+      --bg0:#0b0c10;
+      --bg1:#0f1117;
+      --panel: rgba(255,255,255,0.035);
+      --panel2: rgba(255,255,255,0.05);
+      --line: rgba(255,255,255,0.14);
+      --soft: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --radius: 18px;
+      --gap: 18px;
     }
 
-    /* HEADER COM LOGO */
-    #header h1 a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    body { background: var(--bg0); }
+    #page-wrapper { background: transparent; }
+
+    /* Header */
+    #header{
+      background: rgba(11,12,16,0.60) !important;
+      border-bottom: 1px solid var(--soft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    #header.alt{ background: rgba(11,12,16,0.25) !important; border-bottom: 1px solid transparent; }
+
+    #header .inner-h{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 1.25rem;
+      height: 3.6rem;
     }
 
-    #header img {
-      height: 40px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      text-decoration:none;
+      border: 0;
+    }
+    .brand img{
+      height: 56px;   /* LOGO MAIOR */
       width: auto;
-      display: block;
+      display:block;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55));
+    }
+    .brand .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height: 1.05;
+    }
+    .brand .brand-text strong{
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: .9em;
+      color: var(--text);
+    }
+    .brand .brand-text span{
+      color: var(--muted);
+      font-size: .85em;
+      letter-spacing: .06em;
     }
 
-    /* GRID DE TRABALHOS */
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 20px;
+    /* Menu button */
+    .menu-link{
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border-radius: 999px;
+      padding: .5rem .85rem;
+      text-decoration:none;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-size: .78em;
     }
+    .menu-link:hover{ background: rgba(255,255,255,0.08); }
 
-    .work-card {
-      background: #141418;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .work-thumb {
+    /* Hero / mini bio */
+    #hero{
       position: relative;
-      padding-bottom: 56.25%;
-      overflow: hidden;
+      padding: 7.5rem 0 3.5rem 0;
+      border-bottom: 1px solid var(--soft);
+      overflow:hidden;
+    }
+    #hero:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(1200px 520px at 12% 18%, rgba(255,255,255,0.08), transparent 60%),
+        radial-gradient(900px 480px at 82% 25%, rgba(255,255,255,0.06), transparent 60%),
+        linear-gradient(180deg, rgba(11,12,16,0.20) 0%, rgba(11,12,16,0.75) 60%, rgba(11,12,16,1) 100%),
+        url("images/hero.jpg");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(0.95) contrast(1.05);
+      transform: scale(1.02);
+      pointer-events:none;
+    }
+    #hero:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+      opacity:.35;
+      mix-blend-mode: overlay;
+      pointer-events:none;
+    }
+    #hero .inner{
+      position:relative;
+      z-index:1;
     }
 
-    .work-thumb img {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+      padding: .45rem .8rem;
+      border-radius: 999px;
+      font-size: .82em;
+      color: var(--muted);
+      letter-spacing: .10em;
+      text-transform: uppercase;
+    }
+    .hero-title{
+      margin-top: 1.1rem;
+      font-size: clamp(2.0rem, 4vw, 3.1rem);
+      line-height: 1.08;
+      letter-spacing: .02em;
+      color: var(--text);
+    }
+    .hero-sub{
+      margin-top: .9rem;
+      max-width: 70ch;
+      color: var(--muted);
+      font-size: 1.05em;
+    }
+    .hero-ctas{
+      margin-top: 1.6rem;
+      display:flex;
+      flex-wrap:wrap;
+      gap:.85rem;
+      align-items:center;
+    }
+    .btn{
+      appearance:none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      padding: .8rem 1.05rem;
+      border-radius: 14px;
+      text-decoration:none;
+      font-weight: 650;
+      letter-spacing: .05em;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      cursor:pointer;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.22);
+    }
+    .btn.primary{
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+    }
+    .btn.mini{
+      padding: .55rem .85rem;
+      border-radius: 999px;
+      font-size: .82em;
+      text-transform: uppercase;
+      letter-spacing: .10em;
     }
 
-    .work-meta {
-      padding: 12px;
+    /* Section spacing */
+    .section-block{
+      padding: 3.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-
-    .work-title {
+    .section-block:last-child{ border-bottom: 0; }
+    .section-head{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .section-title{
       margin: 0;
-      font-size: 16px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .95em;
+      color: var(--text);
+    }
+    .section-note{
+      margin: .2rem 0 0;
+      color: var(--muted);
+      max-width: 70ch;
     }
 
-    .work-desc {
-      font-size: 14px;
-      opacity: .7;
+    /* Work grid: ALWAYS 2x2 on desktop, consistent card sizes */
+    .work-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns */
+      gap: var(--gap);
+    }
+    @media (max-width: 820px){
+      .work-grid{ grid-template-columns: 1fr; } /* 1 column on mobile */
+      .brand img{ height: 48px; }
+      #header .inner-h{ height: 3.4rem; }
     }
 
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
+    .work-card{
+      border: 1px solid rgba(255,255,255,0.10);
+      background: var(--panel);
+      border-radius: var(--radius);
+      overflow:hidden;
+      cursor:pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      min-height: 0;
+    }
+    .work-card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.18);
+      background: var(--panel2);
     }
 
-    .btn-mini {
-      padding: 6px 10px;
-      font-size: 14px;
+    .work-thumb{
+      aspect-ratio: 16 / 9;  /* consistent */
+      background: #101217;
+      overflow:hidden;
+      position:relative;
+    }
+    .work-thumb img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.02);
+      transition: transform .35s ease;
+      filter: saturate(0.95) contrast(1.05);
+    }
+    .work-card:hover .work-thumb img{ transform: scale(1.06); }
+    .work-thumb:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.65) 100%);
+      pointer-events:none;
     }
 
-    .work-grid.is-collapsed .work-card:nth-child(n + 5) {
-      display: none;
+    .work-meta{
+      padding: 14px 14px 16px;
+    }
+    .work-topline{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      align-items:baseline;
+      margin-bottom: 6px;
+    }
+    .work-title{
+      margin:0;
+      font-size: 1.02em;
+      letter-spacing: .02em;
+      color: var(--text);
+      line-height: 1.25;
+    }
+    .work-tag{
+      font-size: .75em;
+      color: var(--muted);
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: .18rem .55rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      white-space:nowrap;
+      flex: 0 0 auto;
+    }
+    .work-desc{
+      margin:0;
+      color: var(--muted);
+      font-size: .95em;
+      line-height: 1.45;
     }
 
-    /* MODAL */
+    /* Collapsed state: show ONLY 4 items max (2x2) */
+    .work-grid.is-collapsed .work-card:nth-child(n + 5){
+      display:none;
+    }
 
-    .modal {
+    /* Modal */
+    .modal{
       position: fixed;
       inset: 0;
-      display: none;
-      place-items: center;
-      background: rgba(0,0,0,.8);
+      display:none;
+      place-items:center;
       z-index: 9999;
+      padding: 18px;
     }
-
-    .modal.open {
-      display: grid;
+    .modal.is-open{ display:grid; }
+    .modal-backdrop{
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
-
-    .modal-panel {
-      background: #111;
-      padding: 10px;
-      border-radius: 10px;
-      max-width: 900px;
-      width: 95%;
+    .modal-panel{
+      position:relative;
+      width:min(980px, 96vw);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 18px;
+      background: rgba(15,17,23,0.92);
+      overflow:hidden;
+      box-shadow: 0 30px 120px rgba(0,0,0,0.65);
     }
-
-    .video {
-      position: relative;
+    .modal-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .modal-title{
+      margin:0;
+      font-size: .85em;
+      letter-spacing:.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.2;
+      padding-right: 8px;
+    }
+    .modal-close{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: .5rem .75rem;
+      cursor:pointer;
+    }
+    .video{
+      position:relative;
       padding-bottom: 56.25%;
-      height: 0;
+      height:0;
+      overflow:hidden;
+    }
+    .video iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
     }
 
-    .video iframe {
-      position: absolute;
-      width: 100%;
-      height: 100%;
+    /* Contact footer section - like template feel */
+    #contact{
+      background: linear-gradient(180deg, rgba(11,12,16,1) 0%, rgba(9,10,13,1) 100%) !important;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    #contact .contact{
+      margin-top: 1.2rem;
     }
 
   </style>
 </head>
 
 <body class="is-preload">
+  <div id="page-wrapper">
 
-<div id="page-wrapper">
+    <!-- Header with logo + menu button -->
+    <header id="header" class="alt">
+      <div class="inner-h">
+        <a href="#hero" class="brand">
+          <img src="images/logo_nunca.png" alt="Nunca Filmes" />
+          <div class="brand-text">
+            <strong>Nunca Filmes</strong>
+            <span>Portfólio de vídeo</span>
+          </div>
+        </a>
 
-<header id="header">
-  <h1>
-    <a href="index.html">
-      <img src="images/logo_nunca_500.png" alt="Nunca Filmes Logo" />
-      Nunca Filmes
-    </a>
-  </h1>
-</header>
-
-<section id="banner">
-  <div class="inner">
-    <h2>Nunca Filmes</h2>
-    <p>Portfólio de direção, captação e edição de vídeo</p>
-  </div>
-</section>
-
-<section id="wrapper">
-
-<div class="inner">
-
-<h2 class="major">Trabalhos</h2>
-
-<!-- FILMES -->
-<section>
-  <div class="section-head">
-    <h3>Filmes</h3>
-    <button class="btn-mini toggle">Exibir mais</button>
-  </div>
-
-  <div class="work-grid is-collapsed">
-
-    <div class="work-card" data-youtube="YOUTUBE_ID_1">
-      <div class="work-thumb">
-        <img src="images/work1.jpg" />
+        <a class="menu-link" href="#menu">Menu</a>
       </div>
-      <div class="work-meta">
-        <h4 class="work-title">Filme 1</h4>
-        <p class="work-desc">Descrição</p>
+    </header>
+
+    <!-- Slide Menu -->
+    <nav id="menu">
+      <div class="inner">
+        <h2>Menu</h2>
+        <ul class="links">
+          <li><a href="#hero">Início</a></li>
+          <li><a href="#filmes">Filmes</a></li>
+          <li><a href="#videoclipes">Videoclipes</a></li>
+          <li><a href="#publicidade">Publicidade</a></li>
+          <li><a href="#institucional">Institucional</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+        <a href="#" class="close">Fechar</a>
+      </div>
+    </nav>
+
+    <!-- Hero / minibio -->
+    <section id="hero">
+      <div class="inner">
+        <div class="kicker">Direção · Captação · Edição · Pós</div>
+        <h1 class="hero-title">Nunca Filmes</h1>
+        <p class="hero-sub">
+          Mini bio (troque o texto): produção e pós para marcas, artistas e projetos autorais.
+          Layout clean e sofisticado, com vídeos hospedados como <strong>não listados no YouTube</strong>.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn primary" href="#filmes">Ver trabalhos</a>
+          <a class="btn" href="#contact">Orçamentos / Contato</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content wrapper -->
+    <section id="wrapper" class="wrapper">
+      <div class="inner">
+
+        <!-- ======================
+             FILMES
+             ====================== -->
+        <section id="filmes" class="section-block work-section">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Trabalhos · Filmes</h2>
+              <p class="section-note">Seleção de filmes. Clique em um card para assistir.</p>
+            </div>
+            <button class="btn mini section-toggle" type="button" aria-expanded="false">
+              Exibir mais
+            </button>
+          </div>
+
+          <div class="work-grid is-collapsed">
+            <!-- 8 MOCKUPS -->
+            <div class="work-card" role="button" tabindex="0" data-title="Filme 01" data-youtube="YOUTUBE_ID_F_01" data-tag="Filmes">
+              <div class="work-thumb"><img src="images/thumb-01.jpg" alt="Filme 01" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Filme 01</h3><span class="work-tag">Filmes</span></div><p class="work-desc">Cliente / ano — direção + edição.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Filme 02" data-youtube="YOUTUBE_ID_F_02" data-tag="Filmes">
+              <div class="work-thumb"><img src="images/thumb-02.jpg" alt="Filme 02" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Filme 02</h3><span class="work-tag">Filmes</span></div><p class="work-desc">Descrição curta (1 linha).</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Filme 03" data-youtube="YOUTUBE_ID_F_03" data-tag="Filmes">
+              <div class="work-thumb"><img src="images/thumb-03.jpg" alt="Filme 03" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Filme 03</h3><span class="work-tag">Filmes</span></div><p class="work-desc">Captação + montagem + finalização.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Filme 04" data-youtube="YOUTUBE_ID_F_04" data-tag="Filmes">
+              <div class="work-thumb"><img src="images/thumb-04.jpg" alt="Filme 04" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Filme 04</h3><span class="work-tag">Filmes</span></div><p class="work-desc">Descrição curta (1 linha).</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Filme 05" data-youtube="YOUTUBE_ID_F_05" data-tag="Filmes">
+              <div class="work-thumb"><img src="images/thumb-05.jpg" alt="Filme 05" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Filme 05</h3><span class="work-tag">Filmes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Filme 06" data-youtube="YOUTUBE_ID_F_06" data-tag="Filmes">
+              <div class="work-thumb"><img src="images/thumb-06.jpg" alt="Filme 06" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Filme 06</h3><span class="work-tag">Filmes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Filme 07" data-youtube="YOUTUBE_ID_F_07" data-tag="Filmes">
+              <div class="work-thumb"><img src="images/thumb-07.jpg" alt="Filme 07" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Filme 07</h3><span class="work-tag">Filmes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Filme 08" data-youtube="YOUTUBE_ID_F_08" data-tag="Filmes">
+              <div class="work-thumb"><img src="images/thumb-08.jpg" alt="Filme 08" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Filme 08</h3><span class="work-tag">Filmes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================
+             VIDEOCLIPES
+             ====================== -->
+        <section id="videoclipes" class="section-block work-section">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Trabalhos · Videoclipes</h2>
+              <p class="section-note">Seleção de videoclipes. Clique em um card para assistir.</p>
+            </div>
+            <button class="btn mini section-toggle" type="button" aria-expanded="false">
+              Exibir mais
+            </button>
+          </div>
+
+          <div class="work-grid is-collapsed">
+            <!-- 8 MOCKUPS -->
+            <div class="work-card" role="button" tabindex="0" data-title="Clipe 01" data-youtube="YOUTUBE_ID_VC_01" data-tag="Videoclipes">
+              <div class="work-thumb"><img src="images/thumb-09.jpg" alt="Clipe 01" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Clipe 01</h3><span class="work-tag">Videoclipes</span></div><p class="work-desc">Artista / ano — direção + edição.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Clipe 02" data-youtube="YOUTUBE_ID_VC_02" data-tag="Videoclipes">
+              <div class="work-thumb"><img src="images/thumb-10.jpg" alt="Clipe 02" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Clipe 02</h3><span class="work-tag">Videoclipes</span></div><p class="work-desc">Descrição curta (1 linha).</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Clipe 03" data-youtube="YOUTUBE_ID_VC_03" data-tag="Videoclipes">
+              <div class="work-thumb"><img src="images/thumb-11.jpg" alt="Clipe 03" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Clipe 03</h3><span class="work-tag">Videoclipes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Clipe 04" data-youtube="YOUTUBE_ID_VC_04" data-tag="Videoclipes">
+              <div class="work-thumb"><img src="images/thumb-12.jpg" alt="Clipe 04" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Clipe 04</h3><span class="work-tag">Videoclipes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Clipe 05" data-youtube="YOUTUBE_ID_VC_05" data-tag="Videoclipes">
+              <div class="work-thumb"><img src="images/thumb-13.jpg" alt="Clipe 05" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Clipe 05</h3><span class="work-tag">Videoclipes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Clipe 06" data-youtube="YOUTUBE_ID_VC_06" data-tag="Videoclipes">
+              <div class="work-thumb"><img src="images/thumb-14.jpg" alt="Clipe 06" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Clipe 06</h3><span class="work-tag">Videoclipes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Clipe 07" data-youtube="YOUTUBE_ID_VC_07" data-tag="Videoclipes">
+              <div class="work-thumb"><img src="images/thumb-15.jpg" alt="Clipe 07" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Clipe 07</h3><span class="work-tag">Videoclipes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Clipe 08" data-youtube="YOUTUBE_ID_VC_08" data-tag="Videoclipes">
+              <div class="work-thumb"><img src="images/thumb-16.jpg" alt="Clipe 08" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Clipe 08</h3><span class="work-tag">Videoclipes</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================
+             PUBLICIDADE
+             ====================== -->
+        <section id="publicidade" class="section-block work-section">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Trabalhos · Publicidade</h2>
+              <p class="section-note">Seleção de comerciais/campanhas. Clique em um card para assistir.</p>
+            </div>
+            <button class="btn mini section-toggle" type="button" aria-expanded="false">
+              Exibir mais
+            </button>
+          </div>
+
+          <div class="work-grid is-collapsed">
+            <!-- 8 MOCKUPS -->
+            <div class="work-card" role="button" tabindex="0" data-title="Publicidade 01" data-youtube="YOUTUBE_ID_P_01" data-tag="Publicidade">
+              <div class="work-thumb"><img src="images/thumb-17.jpg" alt="Publicidade 01" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Publicidade 01</h3><span class="work-tag">Publicidade</span></div><p class="work-desc">Cliente / ano — função.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Publicidade 02" data-youtube="YOUTUBE_ID_P_02" data-tag="Publicidade">
+              <div class="work-thumb"><img src="images/thumb-18.jpg" alt="Publicidade 02" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Publicidade 02</h3><span class="work-tag">Publicidade</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Publicidade 03" data-youtube="YOUTUBE_ID_P_03" data-tag="Publicidade">
+              <div class="work-thumb"><img src="images/thumb-19.jpg" alt="Publicidade 03" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Publicidade 03</h3><span class="work-tag">Publicidade</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Publicidade 04" data-youtube="YOUTUBE_ID_P_04" data-tag="Publicidade">
+              <div class="work-thumb"><img src="images/thumb-20.jpg" alt="Publicidade 04" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Publicidade 04</h3><span class="work-tag">Publicidade</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Publicidade 05" data-youtube="YOUTUBE_ID_P_05" data-tag="Publicidade">
+              <div class="work-thumb"><img src="images/thumb-21.jpg" alt="Publicidade 05" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Publicidade 05</h3><span class="work-tag">Publicidade</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Publicidade 06" data-youtube="YOUTUBE_ID_P_06" data-tag="Publicidade">
+              <div class="work-thumb"><img src="images/thumb-22.jpg" alt="Publicidade 06" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Publicidade 06</h3><span class="work-tag">Publicidade</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Publicidade 07" data-youtube="YOUTUBE_ID_P_07" data-tag="Publicidade">
+              <div class="work-thumb"><img src="images/thumb-23.jpg" alt="Publicidade 07" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Publicidade 07</h3><span class="work-tag">Publicidade</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Publicidade 08" data-youtube="YOUTUBE_ID_P_08" data-tag="Publicidade">
+              <div class="work-thumb"><img src="images/thumb-24.jpg" alt="Publicidade 08" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Publicidade 08</h3><span class="work-tag">Publicidade</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================
+             INSTITUCIONAL
+             ====================== -->
+        <section id="institucional" class="section-block work-section">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Trabalhos · Institucional</h2>
+              <p class="section-note">Vídeos institucionais e conteúdo corporativo. Clique em um card para assistir.</p>
+            </div>
+            <button class="btn mini section-toggle" type="button" aria-expanded="false">
+              Exibir mais
+            </button>
+          </div>
+
+          <div class="work-grid is-collapsed">
+            <!-- 8 MOCKUPS -->
+            <div class="work-card" role="button" tabindex="0" data-title="Institucional 01" data-youtube="YOUTUBE_ID_I_01" data-tag="Institucional">
+              <div class="work-thumb"><img src="images/thumb-25.jpg" alt="Institucional 01" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Institucional 01</h3><span class="work-tag">Institucional</span></div><p class="work-desc">Cliente / ano — função.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Institucional 02" data-youtube="YOUTUBE_ID_I_02" data-tag="Institucional">
+              <div class="work-thumb"><img src="images/thumb-26.jpg" alt="Institucional 02" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Institucional 02</h3><span class="work-tag">Institucional</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Institucional 03" data-youtube="YOUTUBE_ID_I_03" data-tag="Institucional">
+              <div class="work-thumb"><img src="images/thumb-27.jpg" alt="Institucional 03" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Institucional 03</h3><span class="work-tag">Institucional</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Institucional 04" data-youtube="YOUTUBE_ID_I_04" data-tag="Institucional">
+              <div class="work-thumb"><img src="images/thumb-28.jpg" alt="Institucional 04" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Institucional 04</h3><span class="work-tag">Institucional</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Institucional 05" data-youtube="YOUTUBE_ID_I_05" data-tag="Institucional">
+              <div class="work-thumb"><img src="images/thumb-29.jpg" alt="Institucional 05" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Institucional 05</h3><span class="work-tag">Institucional</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Institucional 06" data-youtube="YOUTUBE_ID_I_06" data-tag="Institucional">
+              <div class="work-thumb"><img src="images/thumb-30.jpg" alt="Institucional 06" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Institucional 06</h3><span class="work-tag">Institucional</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Institucional 07" data-youtube="YOUTUBE_ID_I_07" data-tag="Institucional">
+              <div class="work-thumb"><img src="images/thumb-31.jpg" alt="Institucional 07" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Institucional 07</h3><span class="work-tag">Institucional</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+
+            <div class="work-card" role="button" tabindex="0" data-title="Institucional 08" data-youtube="YOUTUBE_ID_I_08" data-tag="Institucional">
+              <div class="work-thumb"><img src="images/thumb-32.jpg" alt="Institucional 08" /></div>
+              <div class="work-meta"><div class="work-topline"><h3 class="work-title">Institucional 08</h3><span class="work-tag">Institucional</span></div><p class="work-desc">Descrição curta.</p></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- Contact / Footer like initial template -->
+    <section id="contact" class="wrapper style3">
+      <div class="inner">
+        <h2 class="major">Contato</h2>
+        <p style="color: rgba(255,255,255,0.72); max-width: 70ch;">
+          Para orçamento, parcerias ou projetos: me chame por e-mail ou WhatsApp. (Troque os dados abaixo.)
+        </p>
+
+        <ul class="contact">
+          <li class="icon solid fa-envelope">
+            <a href="mailto:seuemail@dominio.com">seuemail@dominio.com</a>
+          </li>
+          <li class="icon solid fa-phone">
+            <a href="#">(11) 99999-9999</a>
+          </li>
+          <li class="icon brands fa-instagram">
+            <a href="#">instagram.com/nuncafilmes</a>
+          </li>
+          <li class="icon brands fa-youtube">
+            <a href="#">youtube.com/@seucanal</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="footer">
+      <div class="inner">
+        <ul class="copyright">
+          <li>&copy; Nunca Filmes.</li>
+          <li>Template base: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="videoModal" aria-hidden="true">
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+          <p class="modal-title" id="modalTitle">Projeto</p>
+          <button class="modal-close" id="modalClose" type="button">Fechar</button>
+        </div>
+        <div class="video" id="modalVideoWrap"></div>
       </div>
     </div>
 
-    <div class="work-card" data-youtube="YOUTUBE_ID_2">
-      <div class="work-thumb">
-        <img src="images/work2.jpg" />
-      </div>
-      <div class="work-meta">
-        <h4>Filme 2</h4>
-      </div>
-    </div>
-
-    <div class="work-card" data-youtube="YOUTUBE_ID_3">
-      <div class="work-thumb">
-        <img src="images/work3.jpg" />
-      </div>
-      <div class="work-meta">
-        <h4>Filme 3</h4>
-      </div>
-    </div>
-
-    <div class="work-card" data-youtube="YOUTUBE_ID_4">
-      <div class="work-thumb">
-        <img src="images/work4.jpg" />
-      </div>
-      <div class="work-meta">
-        <h4>Filme 4</h4>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- VIDEOCLIPES -->
-<section>
-  <div class="section-head">
-    <h3>Videoclipes</h3>
-    <button class="btn-mini toggle">Exibir mais</button>
   </div>
 
-  <div class="work-grid is-collapsed">
+  <!-- Solid State scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.min.js"></script>
+  <script src="assets/js/main.js"></script>
 
-    <div class="work-card" data-youtube="YOUTUBE_ID_5">
-      <div class="work-thumb">
-        <img src="images/work5.jpg" />
-      </div>
-      <div class="work-meta"><h4>Clipe 1</h4></div>
-    </div>
+  <script>
+    // Expand/collapse per section
+    (function(){
+      document.querySelectorAll(".work-section").forEach((section) => {
+        const grid = section.querySelector(".work-grid");
+        const btn = section.querySelector(".section-toggle");
+        if (!grid || !btn) return;
 
-    <div class="work-card" data-youtube="YOUTUBE_ID_6">
-      <div class="work-thumb">
-        <img src="images/work6.jpg" />
-      </div>
-      <div class="work-meta"><h4>Clipe 2</h4></div>
-    </div>
+        const cards = grid.querySelectorAll(".work-card");
+        if (cards.length <= 4) {
+          btn.style.display = "none";
+          grid.classList.remove("is-collapsed");
+          return;
+        }
 
-  </div>
-</section>
+        btn.addEventListener("click", () => {
+          const collapsed = grid.classList.contains("is-collapsed");
+          if (collapsed) {
+            grid.classList.remove("is-collapsed");
+            btn.textContent = "Exibir menos";
+            btn.setAttribute("aria-expanded", "true");
+          } else {
+            grid.classList.add("is-collapsed");
+            btn.textContent = "Exibir mais";
+            btn.setAttribute("aria-expanded", "false");
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    })();
 
-<!-- PUBLICIDADE -->
-<section>
-  <div class="section-head">
-    <h3>Publicidade</h3>
-    <button class="btn-mini toggle">Exibir mais</button>
-  </div>
+    // Modal video player
+    (function () {
+      const modal = document.getElementById("videoModal");
+      const backdrop = document.getElementById("modalBackdrop");
+      const closeBtn = document.getElementById("modalClose");
+      const titleEl = document.getElementById("modalTitle");
+      const wrap = document.getElementById("modalVideoWrap");
 
-  <div class="work-grid is-collapsed">
+      function openModal(title, youtubeId) {
+        // impede abrir com placeholder
+        if (!youtubeId || youtubeId.startsWith("YOUTUBE_ID_")) {
+          alert("Troque o ID do YouTube deste projeto (data-youtube).");
+          return;
+        }
 
-    <div class="work-card" data-youtube="YOUTUBE_ID_7">
-      <div class="work-thumb">
-        <img src="images/work7.jpg" />
-      </div>
-      <div class="work-meta"><h4>Pub 1</h4></div>
-    </div>
+        titleEl.textContent = title || "Projeto";
+        const src = "https://www.youtube.com/embed/" + youtubeId + "?rel=0&modestbranding=1";
 
-  </div>
-</section>
+        wrap.innerHTML =
+          '<iframe src="' + src + '" title="' + (title || "Projeto").replace(/"/g, "") + '" frameborder="0" ' +
+          'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+          'allowfullscreen></iframe>';
 
-<!-- INSTITUCIONAL -->
-<section>
-  <div class="section-head">
-    <h3>Institucional</h3>
-    <button class="btn-mini toggle">Exibir mais</button>
-  </div>
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
 
-  <div class="work-grid is-collapsed">
+      function closeModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        wrap.innerHTML = "";
+        document.body.style.overflow = "";
+      }
 
-    <div class="work-card" data-youtube="YOUTUBE_ID_8">
-      <div class="work-thumb">
-        <img src="images/work8.jpg" />
-      </div>
-      <div class="work-meta"><h4>Institucional 1</h4></div>
-    </div>
+      document.querySelectorAll(".work-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          openModal(card.getAttribute("data-title"), card.getAttribute("data-youtube"));
+        });
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openModal(card.getAttribute("data-title"), card.getAttribute("data-youtube"));
+          }
+        });
+      });
 
-  </div>
-</section>
-
-</div>
-
-</section>
-
-</div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-panel">
-    <div class="video" id="modal-video"></div>
-  </div>
-</div>
-
-<script>
-
-document.querySelectorAll(".toggle").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const grid = btn.parentElement.nextElementSibling;
-
-    grid.classList.toggle("is-collapsed");
-
-    btn.textContent =
-      grid.classList.contains("is-collapsed")
-        ? "Exibir mais"
-        : "Exibir menos";
-  });
-});
-
-const modal = document.getElementById("modal");
-const videoWrap = document.getElementById("modal-video");
-
-document.querySelectorAll(".work-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const id = card.dataset.youtube;
-
-    videoWrap.innerHTML = `
-      <iframe
-        src="https://www.youtube.com/embed/${id}?rel=0"
-        frameborder="0"
-        allowfullscreen>
-      </iframe>`;
-
-    modal.classList.add("open");
-  });
-});
-
-modal.addEventListener("click", () => {
-  modal.classList.remove("open");
-  videoWrap.innerHTML = "";
-});
-
-</script>
+      backdrop.addEventListener("click", closeModal);
+      closeBtn.addEventListener("click", closeModal);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+      });
+    })();
+  </script>
 
 </body>
 </html>
