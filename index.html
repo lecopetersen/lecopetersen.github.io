@@ -204,12 +204,12 @@
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.055);
       color: var(--text);
-      padding: .66rem .92rem;   /* menor */
-      border-radius: 12px;
+      padding: .55rem .80rem;   /* menor */
+      border-radius: 10px;
       text-decoration:none;
       font-weight: 720;
       letter-spacing: .04em;
-      font-size: .95em;         /* menor */
+      font-size: .88em;         /* menor */
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
       cursor:pointer;
       line-height: 1.1;
@@ -232,6 +232,18 @@
       text-transform: uppercase;
       letter-spacing: .14em;
       line-height: 1.15;
+    }
+
+    /* BIO COLAPSÁVEL */
+    .hero-sub.collapsed{
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .bio-toggle{
+      margin-top: 0.6rem;
     }
 
     /* Wrapper encosta mais nos trabalhos */
@@ -403,7 +415,7 @@
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.06);
       color: var(--text);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: .5rem .75rem;
       cursor:pointer;
     }
@@ -496,7 +508,7 @@
       <div class="inner">
         <h1 class="hero-title">Nunca Filmes</h1>
 
-        <div class="hero-sub">
+        <div id="bioText" class="hero-sub collapsed">
           <p>
             Criada por Leco Petersen em 2015, a Nunca Filmes iniciou suas atividades com a participação no Festival Internacional
             de Audiovisual MIMPI, organizado pela revista VOID. Intitulado de "SEXTO", uma co-produção com a Take Indpnt, o vídeo
@@ -510,6 +522,8 @@
             fazendo uso de conceitos cinematográficos na criação das suas peças audiovisuais.
           </p>
         </div>
+
+        <button id="bioToggle" class="btn mini bio-toggle" type="button" aria-expanded="false">Exibir mais</button>
 
         <div class="hero-ctas">
           <!-- agora aponta pro TÍTULO, não pro thumb -->
@@ -799,6 +813,26 @@
             section.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         });
+      });
+    })();
+
+    // Bio expandir/recolher
+    (function(){
+      const bio = document.getElementById("bioText");
+      const btn = document.getElementById("bioToggle");
+      if (!bio || !btn) return;
+
+      btn.addEventListener("click", () => {
+        const isCollapsed = bio.classList.contains("collapsed");
+        if (isCollapsed) {
+          bio.classList.remove("collapsed");
+          btn.textContent = "Exibir menos";
+          btn.setAttribute("aria-expanded", "true");
+        } else {
+          bio.classList.add("collapsed");
+          btn.textContent = "Exibir mais";
+          btn.setAttribute("aria-expanded", "false");
+        }
       });
     })();
 
